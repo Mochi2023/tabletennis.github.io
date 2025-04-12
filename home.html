@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>乒乓球俱樂部管理系統</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+</head>
+<body>
+    <div class="home-container">
+        <div class="logo-container">
+            <img src="images/logo.png" alt="乒乓球俱樂部標誌" class="logo-image">
+            <h1 class="main-title">乒乓球俱樂部管理系統</h1>
+        </div>
+        
+        <div class="ping-pong-animation">
+            <div class="table"></div>
+            <div class="net"></div>
+            <div class="ball"></div>
+            <div class="paddle paddle-left"></div>
+            <div class="paddle paddle-right"></div>
+        </div>
+        
+        <div class="menu-container">
+            <a href="index.html" class="menu-item">
+                <div class="menu-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="menu-text">會員管理</div>
+            </a>
+            
+            <a href="match.html" class="menu-item">
+                <div class="menu-icon">
+                    <i class="fas fa-table-tennis"></i>
+                </div>
+                <div class="menu-text">比賽系統</div>
+            </a>
+        </div>
+        
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-value" id="memberCount">0</div>
+                <div class="stat-label">會員總數</div>
+            </div>
+            
+            <div class="stat-item">
+                <div class="stat-value" id="matchCount">0</div>
+                <div class="stat-label">比賽總數</div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2023 乒乓球俱樂部管理系統 | 版權所有</p>
+        </footer>
+    </div>
+    
+    <script src="js/script.js"></script>
+    <script src="js/home.js"></script>
+</body>
+</html>

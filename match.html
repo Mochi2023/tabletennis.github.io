@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>乒乓球比賽系統 - 乒乓球俱樂部</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/match.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="images/logo.png" alt="乒乓球俱樂部標誌">
+                <h1>乒乓球俱樂部比賽系統</h1>
+            </div>
+            <nav>
+                <a href="home.html" class="btn primary"><i class="fas fa-home"></i> 返回首頁</a>
+                <a href="index.html" class="btn primary"><i class="fas fa-users"></i> 會員管理</a>
+                <a href="match.html" class="btn primary active"><i class="fas fa-table-tennis"></i> 比賽系統</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- 比賽設置區域 -->
+            <div id="matchSetup" class="match-section">
+                <h2>比賽設置</h2>
+                <div class="setup-container">
+                    <div class="form-group">
+                        <label for="matchFormat">比賽局數</label>
+                        <select id="matchFormat" required>
+                            <option value="1" selected>1局1勝</option>
+                            <option value="3">3局2勝</option>
+                            <option value="5">5局3勝</option>
+                            <option value="7">7局4勝</option>
+                        </select>
+                    </div>
+                    <div class="players-selection">
+                        <div class="form-group">
+                            <label for="player1">選手 1</label>
+                            <select id="player1" required>
+                                <option value="">-- 選擇選手 --</option>
+                                <!-- 會員列表將通過JavaScript動態生成 -->
+                            </select>
+                        </div>
+                        <div class="versus">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="form-group">
+                            <label for="player2">選手 2</label>
+                            <select id="player2" required>
+                                <option value="">-- 選擇選手 --</option>
+                                <!-- 會員列表將通過JavaScript動態生成 -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button id="startMatchBtn" class="btn primary"><i class="fas fa-play"></i> 開始比賽</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 比賽進行區域 -->
+            <div id="matchInProgress" class="match-section hidden">
+                <div class="match-header">
+                    <h2>比賽進行中</h2>
+                    <div class="match-info">
+                        <span id="currentSet">第 1 局</span>
+                        <span id="matchScore">0 - 0</span>
+                    </div>
+                </div>
+                
+                <div class="match-arena">
+                    <div class="player player-1">
+                        <div class="player-info">
+                            <h3 id="player1Name">選手 1</h3>
+                            <div class="player-details">
+                                <span id="player1RacketType">直板/反膠</span>
+                                <span id="player1WinRate">勝率: 75%</span>
+                            </div>
+                        </div>
+                        <div class="score-container">
+                            <div class="score" id="player1Score">0</div>
+                            <div id="player1Serving" class="serving-indicator">
+                                <i class="fas fa-circle"></i>
+                            </div>
+                        </div>
+                        <div class="score-controls">
+                            <button id="player1ScoreBtn" class="btn primary score-btn">
+                                <i class="fas fa-plus"></i> 得分
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="match-center">
+                        <div class="set-scores" id="setScores">
+                            <!-- 局分將通過JavaScript動態生成 -->
+                        </div>
+                        <div class="table-tennis-table">
+                            <div class="net"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="player player-2">
+                        <div class="player-info">
+                            <h3 id="player2Name">選手 2</h3>
+                            <div class="player-details">
+                                <span id="player2RacketType">橫板/正膠</span>
+                                <span id="player2WinRate">勝率: 82%</span>
+                            </div>
+                        </div>
+                        <div class="score-container">
+                            <div class="score" id="player2Score">0</div>
+                            <div id="player2Serving" class="serving-indicator">
+                                <i class="fas fa-circle"></i>
+                            </div>
+                        </div>
+                        <div class="score-controls">
+                            <button id="player2ScoreBtn" class="btn primary score-btn">
+                                <i class="fas fa-plus"></i> 得分
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="match-controls">
+                    <button id="undoBtn" class="btn secondary"><i class="fas fa-undo"></i> 撤銷</button>
+                    <button id="endMatchBtn" class="btn danger"><i class="fas fa-stop"></i> 結束比賽</button>
+                </div>
+            </div>
+
+            <!-- 比賽結果區域 -->
+            <div id="matchResult" class="match-section hidden">
+                <h2>比賽結果</h2>
+                <div class="result-container">
+                    <div class="winner-announcement">
+                        <div class="trophy-animation">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>勝利者: <span id="winnerName">選手名稱</span></h3>
+                    </div>
+                    
+                    <div class="final-score">
+                        <div class="player-result">
+                            <h4 id="finalPlayer1Name">選手 1</h4>
+                            <div class="final-score-value" id="finalPlayer1Score">0</div>
+                        </div>
+                        <div class="result-separator">vs</div>
+                        <div class="player-result">
+                            <h4 id="finalPlayer2Name">選手 2</h4>
+                            <div class="final-score-value" id="finalPlayer2Score">0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="set-details">
+                        <h4>詳細比分</h4>
+                        <div id="setDetails" class="set-details-list">
+                            <!-- 詳細比分將通過JavaScript動態生成 -->
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button id="saveResultBtn" class="btn success"><i class="fas fa-save"></i> 保存結果</button>
+                        <button id="newMatchBtn" class="btn primary"><i class="fas fa-plus"></i> 新比賽</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 比賽結束確認彈出視窗 -->
+        <div id="confirmEndMatchModal" class="modal">
+            <div class="modal-content">
+                <h2>確認結束比賽</h2>
+                <p>您確定要結束當前比賽嗎？比賽將被記錄為未完成。</p>
+                <div class="form-actions">
+                    <button type="button" class="btn secondary" id="cancelEndMatchBtn">取消</button>
+                    <button type="button" class="btn danger" id="confirmEndMatchBtn">結束比賽</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 局間過場彈出視窗 -->
+        <div id="setTransitionModal" class="modal">
+            <div class="modal-content set-transition">
+                <h2 id="setEndMessage">第 1 局結束</h2>
+                <div class="set-score-display">
+                    <div class="player-set-score">
+                        <h3 id="setPlayer1Name">選手 1</h3>
+                        <div class="set-score" id="setPlayer1Score">11</div>
+                    </div>
+                    <div class="set-score-separator">:</div>
+                    <div class="player-set-score">
+                        <h3 id="setPlayer2Name">選手 2</h3>
+                        <div class="set-score" id="setPlayer2Score">9</div>
+                    </div>
+                </div>
+                <div class="countdown">
+                    <p>下一局將在 <span id="countdown">5</span> 秒後開始</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2023 乒乓球俱樂部比賽系統 | 版權所有</p>
+        </footer>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/match.js"></script>
+</body>
+</html>

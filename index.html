@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>乒乓球俱樂部會員管理系統</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="images/logo.png" alt="乒乓球俱樂部標誌">
+                <h1>乒乓球俱樂部會員管理系統</h1>
+            </div>
+            <nav>
+                <a href="home.html" class="btn primary"><i class="fas fa-home"></i> 返回首頁</a>
+                <a href="match.html" class="btn primary"><i class="fas fa-table-tennis"></i> 比賽系統</a>
+                <button id="addMemberBtn" class="btn primary"><i class="fas fa-plus"></i> 新增會員</button>
+            </nav>
+        </header>
+
+        <main>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="搜尋會員...">
+                <button class="btn search"><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="members-container">
+                <h2>會員列表</h2>
+                <div class="members-table-container">
+                    <table id="membersTable">
+                        <thead>
+                            <tr>
+                                <th>編號</th>
+                                <th>姓名</th>
+                                <th>球板類型/膠皮</th>
+                                <th>球齡</th>
+                                <th>勝率</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="membersTableBody">
+                            <!-- 會員資料將通過JavaScript動態生成 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <!-- 新增/編輯會員的彈出表單 -->
+        <!-- 新增/編輯會員的彈出表單 -->
+        <div id="memberFormModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modalTitle">新增會員</h2>
+                <form id="memberForm">
+                    <input type="hidden" id="memberId">
+                    <div class="form-group">
+                        <label for="name">姓名</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="racketType">球板類型</label>
+                        <select id="racketType" required>
+                            <option value="直板">直板</option>
+                            <option value="橫板">橫板</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rubberType">膠皮</label>
+                        <select id="rubberType" required>
+                            <option value="正膠">正膠</option>
+                            <option value="生膠">生膠</option>
+                            <option value="長膠">長膠</option>
+                            <option value="反膠">反膠</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="playYears">球齡 (年)</label>
+                        <input type="number" id="playYears" min="0" step="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">電話 (可選)</label>
+                        <input type="tel" id="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="joinDate">加入日期</label>
+                        <input type="date" id="joinDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">備註</label>
+                        <textarea id="notes"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn secondary" id="cancelBtn">取消</button>
+                        <button type="submit" class="btn primary">儲存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 確認刪除的彈出視窗 -->
+        <div id="confirmDeleteModal" class="modal">
+            <div class="modal-content">
+                <h2>確認刪除</h2>
+                <p>您確定要刪除此會員嗎？此操作無法撤銷。</p>
+                <div class="form-actions">
+                    <button type="button" class="btn secondary" id="cancelDeleteBtn">取消</button>
+                    <button type="button" class="btn danger" id="confirmDeleteBtn">刪除</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 对战记录的彈出視窗 -->
+        <div id="matchRecordsModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="recordsModalTitle">對戰記錄</h2>
+                <div class="records-container">
+                    <table id="recordsTable">
+                        <thead>
+                            <tr>
+                                <th>日期</th>
+                                <th>對手</th>
+                                <th>比分</th>
+                                <th>結果</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recordsTableBody">
+                            <!-- 對戰記錄將通過JavaScript動態生成 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2023 乒乓球俱樂部會員管理系統 | 版權所有</p>
+        </footer>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
